@@ -185,4 +185,5 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
 
+    'client_token' => env('CLIENT_TOKEN'),
 ];

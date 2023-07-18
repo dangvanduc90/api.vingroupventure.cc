@@ -2,8 +2,14 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Routing\Router;
+use Illuminate\Validation\ValidationException;
 use Throwable;
+use Exception;
 
 class Handler extends ExceptionHandler
 {
@@ -27,4 +33,17 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    public function render($request, Throwable $e)
+    {
+        if ($request->isJson()) {
+            return response()->json([
+                'data' => [],
+                'code' => $e->getCode() === 0 || $e->getCode() === 200 ? 500 : $e->getCode(),
+                'msg' => $e->getMessage(),
+            ]);
+        }
+        return parent::render($request, $e);
+    }
+
 }
