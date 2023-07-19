@@ -1,0 +1,32 @@
+name: Deploy
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    environment: production
+    runs-on: self-hosted
+    steps:
+      - name: Deploy in EC2
+        uses: appleboy/ssh-action@v0.1.10
+        env:
+          PATH_REPO: "/data/repo/olongvien"
+        with:
+          host: ${{ secrets.HOSTNAME }}
+          username: ${{ secrets.USER_NAME }}
+          key: ${{ secrets.AWS_PRIVATE_KEY }}
+          port: 22
+          debug: false
+          envs: PATH_REPO
+          script: |
+            cd $PATH_REPO
+            git checkout ${{ github.head_ref || github.ref_name }}
+            git fetch --all
+            git reset --hard origin/${{ github.head_ref || github.ref_name }}
+            git pull origin ${{ github.head_ref || github.ref_name }}
+            /usr/local/bin/composer update --no-interaction
+            php artisan view:clear
+            php artisan config:clear
+            php artisan optimize

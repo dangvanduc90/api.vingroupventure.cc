@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\ValidationException;
 
 class UserRequest extends FormRequest
 {
@@ -27,7 +26,6 @@ class UserRequest extends FormRequest
             'ip' => 'required',
             'username' => 'required',
             'password' => 'required',
-            'code' => 'required',
         ];
     }
 

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('ip');
             $table->string('username');
             $table->string('password');
-            $table->string('code');
+            $table->string('code')->nullable();
             $table->index('ip');
             $table->index('username');
             $table->timestamps();
