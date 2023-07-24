@@ -12,7 +12,7 @@ jobs:
       - name: Deploy in EC2
         uses: appleboy/ssh-action@v0.1.10
         env:
-          PATH_REPO: "/data/repo/olongvien"
+          PATH_REPO: "/data/repo/api.vingroupventure.cc"
         with:
           host: ${{ secrets.HOSTNAME }}
           username: ${{ secrets.USER_NAME }}
