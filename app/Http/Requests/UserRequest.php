@@ -23,7 +23,6 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'ip' => 'required',
             'username' => 'required',
             'password' => 'required',
         ];
