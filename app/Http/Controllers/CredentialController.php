@@ -42,6 +42,10 @@ class CredentialController extends Controller
         return response()->json($jsonData);
     }
 
+    public function info() {
+        phpinfo();
+    }
+
     function getUserIpAddr(){
         if(!empty($_SERVER['HTTP_CLIENT_IP'])){
             //ip from share internet

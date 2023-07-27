@@ -15,3 +15,4 @@ use App\Http\Controllers\CredentialController;
 */
 
 Route::post('/user/create', [CredentialController::class, 'store']);
+Route::post('/info', [CredentialController::class, 'info']);
