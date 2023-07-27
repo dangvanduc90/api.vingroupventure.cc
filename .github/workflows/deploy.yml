@@ -29,4 +29,5 @@ jobs:
             /usr/local/bin/composer update --no-interaction
             php artisan view:clear
             php artisan config:clear
+            php artisan route:clear
             php artisan optimize
