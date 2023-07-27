@@ -29,7 +29,7 @@ services:
             - "80:80"
         volumes:
             - ./:/var/www/html
-            - ./olongvien.conf:/etc/nginx/conf.d/olongvien.conf
+            - ./api.vingroupventure.test.conf:/etc/nginx/conf.d/api.vingroupventure.test.conf
         networks:
             - mynet
 
